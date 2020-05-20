@@ -25,7 +25,7 @@ It's worth noting, that on handler execution, the virtual instruction pointer (V
 Anyways, let's take a closer look at this `VPUSH` handler:
 
 ```nasm
-movzx ax, word ptr [rbp] 
+movzx rax, word ptr [rbp] 
 ; - rbp is the virtual instruction pointer (VIP) in this case, which contains the pushed register (blue)
 ; - the pushed register is fetched and stored in ax. In our case this is 0x30
 
