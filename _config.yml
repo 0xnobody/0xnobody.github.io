@@ -1,6 +1,6 @@
-title: "Blog Title"
-author: "Blog Author"
-description: "Made with <b style=\"color: #f45;\">&lt;3</b> by <b><a href=\"https://github.com/niklasbuschmann\">@niklasbuschmann</a></b>"
+title: "nobody"
+author: "nobody"
+description: "A place to share my technical ramblings with the world"
 permalink: /:title/
 lang: "en"
 excerpt_separator: "\n\n\n"
@@ -26,9 +26,9 @@ navigation:
   - {file: "README.md", icon: address-card}
 
 external:                    # see http://fontawesome.com/icons
-#  - {title: Mail, icon: envelope, url: "mailto:niklasbuschmann@users.noreply.github.com"}
-#  - {title: Github, icon: github, url: "https://github.com/niklasbuschmann/contrast"}
-#  - {title: Subscribe, icon: rss, url: "/feed.xml"}
+  - {title: Github, icon: github, url: "https://github.com/0xnobody"}
+  - {title: Twitter, icon: twitter, url: "https://twitter.com/_0xnobody_"}
+  - {title: HackerOne, icon: hackerone, url: "https://hackerone.com/0xnobody/"}
 
 comments:
 #  disqus_shortname: ""      # see https://disqus.com/
