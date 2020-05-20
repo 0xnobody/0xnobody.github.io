@@ -10,7 +10,7 @@ layout: post
 Over the last 10 years or so, virtualization based obfuscation has become the de-facto standard in defensive and offensive software alike. As the complexity and power of disassembling tools has improved, software security solutions have kept up rather well. Packers and code mutation tools, being easily defeated by even newbie attackers, have been replaced by these virtual machine based protectors. Today, the two main 'pioneers' in this field, controlling the vast majority of the market are [VMProtect](https://vmpsoft.com/){:target="_blank"} and [Themida](https://www.oreans.com/){:target="_blank"}. While we will be looking into analyzing (and breaking) them specifically in some future articles, today we'll just be looking into how we can lift *any* VM into [Can](https://blog.can.ac/){:target="_blank"}'s promising [VTIL](https://vtil.io/){:target="_blank"}.
 
 ## But first, what actually is virtualization?
-Virtualization is the **recompilation** of instructions to a **custom propreitary architecture**, and the generation of **handler routines** to emulate said architecture. Let's look at an example of the life of just one simple instruction, `push rcx`:
+Virtualization is the **recompilation** of instructions to a **custom proprietary architecture**, and the generation of **handler routines** to emulate said architecture. Let's look at an example of the life of just one simple instruction, `push rcx`:
 
 | ![alt text](../assets/virtualization-1/vm-flowchart.png "Life of a push rcx instruction") |
 |:--:|
@@ -57,7 +57,7 @@ It must be said, however, that the example I gave above is an extremely simple o
 
 Well, how does this impact analysis, you ask? Well, since you're reading this article, you must already know ;)
 But to name a few:
-- The original instructions are lost, forever. Only the behaviour is retained, in a propreitary, usually randomized architecture. For example, even after full devirtualization, we can't for 100% say that the original register used for the push is `rcx`.
+- The original instructions are lost, forever. Only the behaviour is retained, in a proprietary, usually randomized architecture. For example, even after full devirtualization, we can't for 100% say that the original register used for the push is `rcx`.
 - The VM's architecture can differ significantly from the original. For example, a single VM instruction could push 3 registers, exchange 2 registers, and write to one register. All in a *single* virtual instruction!
 - Other obfuscation techniques (such as mutation) can now be applied on both the host level (real x86 instructions executing on the PC) and on the guest level (the virtual instructions represented by the handlers).
 - Control flow is in most cases highly obscured. Often conditional jumps are manually emulated. This makes tracking basic blocks difficult.
@@ -142,7 +142,7 @@ Using this approach, by keeping a table of handlers with their corresponding pat
 
 Okay, so now we can walk through VM routines, identify their handlers and analyze them for information. So for all intents and purposes, the *lifting* phase is complete. But if you recall, our final goal is x86. The process our scraped information needs to go through now to produce readable x86 instructions is called *translation*. This is converting the 'instructions' we have just lifted into a different architecture, in our case x86.
 
-This is actually a really difficult task to accomplish. Like I previously mentioned, virtualization is a descructive process. Data gets lost in the transition, which must be somehow recovered. This leads to a ton of complications:
+This is actually a really difficult task to accomplish. Like I previously mentioned, virtualization is a destructive process. Data gets lost in the transition, which must be somehow recovered. This leads to a ton of complications:
 - Some virtualizer architectures can purposely omit certain instructions and replace them with other functional equivalents. This means that a pretty x86 `sub` can turn in to a bunch of bitwise operations.
 - VM architectures can be really diverse. They can be RISC, CISC, and/or stack machines. They can have 8, 16, or 100 registers. All of these 'features' need to be generalized, and converted back into the often significantly different x86 architecture.
 - Conditional jumps can be manually emulated by these VM architectures. This makes retrieving basic block addresses a challenge, and reconstructing the original jump instruction an even bigger challenge. For example, [an x86 `jbe` can easily become hundreds of virtual instructions](https://blog.can.ac/2020/04/11/writing-an-optimizing-il-compiler-for-dummies-by-a-dummy/){:target="_blank"}. 
