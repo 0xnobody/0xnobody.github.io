@@ -204,7 +204,7 @@ Wow! How beautiful!
 
 The instruction that's *actually* emitted is a `str` (read: "store") instruction, which (you guessed it) stores our '0x30' register (called `vr6`) at `$sp + 0x8`. Easy!
 
-## Conslusion
+## Conclusion
 
 To many reverse engineers, virtualization software protection is an enormous roadblock in analysis. Many are quickly demotivated by the complexity of the topic or lack of public information available. This article, and this series, is meant to change that, and prove that **virtualization CAN be analyzed and reversed**, and is not something that you, as a reverse engineer, should avoid or hide from. Tackle it head on! It's not as difficult as you might think! 
 
