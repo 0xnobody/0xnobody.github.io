@@ -146,7 +146,7 @@ This is actually a really difficult task to accomplish. Like I previously mentio
 - Some virtualizer architectures can purposely omit certain instructions and replace them with other functional equivalents. This means that a pretty x86 `sub` can turn in to a bunch of bitwise operations.
 - VM architectures can be really diverse. They can be RISC, CISC, and/or stack machines. They can have 8, 16, or 100 registers. All of these 'features' need to be generalized, and converted back into the often significantly different x86 architecture.
 - Conditional jumps can be manually emulated by these VM architectures. This makes retrieving basic block addresses a challenge, and reconstructing the original jump instruction an even bigger challenge. For example, [an x86 `jbe` can easily become hundreds of virtual instructions](https://blog.can.ac/2020/04/11/writing-an-optimizing-il-compiler-for-dummies-by-a-dummy/){:target="_blank"}. 
-- Compiler frameworks like [LLVM](https://llvm.org/){:target="_blank"} were not made for this task, so we don't get much fine-grained control over things like registers or flags, which is nessecary for full devirtualization.
+- Compiler frameworks like [LLVM](https://llvm.org/){:target="_blank"} were not made for this task, so we don't get much fine-grained control over things like registers or flags, which is necessary for full devirtualization.
 
 So until now, ambitious reverse engineers were forced to come up with their own solutions to this problem. That's about to change with [VTIL](https://vtil.io/){:target="_blank"}.
 
